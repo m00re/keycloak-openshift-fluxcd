@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-https
+  namespace: myproject
+  labels:
+    application: keycloak
+  annotations:
+    description: A keycloak instance, running with SSL/TLS
+spec:
+  selector:
+    deploymentConfig: keycloak
+  type: NodePort
+  ports:
+    - name: https
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-cluster
+spec:
+  selector:
+    application: keycloak
+  clusterIP: None
+  ports:
+    - name: https
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
