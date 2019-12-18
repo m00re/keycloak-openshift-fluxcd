@@ -9,7 +9,7 @@ metadata:
     description: A keycloak instance, running with SSL/TLS
 spec:
   selector:
-    deploymentConfig: keycloak
+    application: keycloak
   type: NodePort
   ports:
     - name: https
@@ -21,6 +21,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: keycloak-cluster
+  namespace: myproject
+  labels:
+    application: keycloak
+  annotations:
+      description: A service that resolves to all pods running, used for clustering / auto-discovery
 spec:
   selector:
     application: keycloak

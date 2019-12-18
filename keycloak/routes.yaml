@@ -10,6 +10,6 @@ metadata:
     description: Route for application's https service.
 spec:
   to:
-    name: keycloak
+    name: keycloak-https
   tls:
     termination: passthrough

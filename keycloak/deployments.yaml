@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: keycloak
@@ -14,7 +14,8 @@ spec:
     rollingUpdate:
       maxUnavailable: 0
   selector:
-    application: keycloak
+    matchLabels:
+      application: keycloak
   template:
     metadata:
       name: keycloak
@@ -55,6 +56,6 @@ spec:
             - name: JGROUPS_DISCOVERY_PROTOCOL
               value: dns.DNS_PING
             - name: JGROUPS_DISCOVERY_PROPERTIES
-              value: dns_query=keycloak.myproject.svc.cluster.local
+              value: dns_query=keycloak-cluster.myproject.svc.cluster.local
           securityContext:
             privileged: false
